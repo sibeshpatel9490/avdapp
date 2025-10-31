@@ -6,6 +6,11 @@ pipeline {
                 git url:'https://github.com/sibeshpatel9490/avdapp.git', branch:'main'
             }
         }
+        stage('Cleanup') {
+            steps {
+                bat 'docker rm -f $(docker ps -q)'
+            }
+        }
         stage('Build Image') {
             steps {
                 bat 'docker build -t myimage .'
